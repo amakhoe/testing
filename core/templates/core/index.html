@@ -1,0 +1,53 @@
+{% extends "core/base.html" %}
+{%block title%}Home Page{%endblock%}
+{% block content%}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {%if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Messages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">novo item</a>
+          </li>
+          {%else%}
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Registrar</a>
+          </li>
+          {%endif%}
+          </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+{%for item in items%}
+<a href="{% url 'item:detalhes' item.id%}">
+<img src="{{item.image.url}}">
+<p>{{item.name}}</p>
+<p>{{item.price}}</p>
+</a>
+{%endfor%}
+<div>
+    {%for category in categorias%}
+<p>{{category.name}}</p>
+<p>{{category.items.count }}</p>
+
+    {%endfor%}
+</div>
+{%endblock%}

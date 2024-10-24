@@ -1,0 +1,24 @@
+{%extends 'core/base.html'%}
+{%block title%}{{item.name}}{%endblock%}
+{%block content%}
+<div class="container mx-auto">
+    <h1>{{item.name}}</h1>
+    <img class="w-auto" src="{{item.image.url}}">
+</div>
+<div class="container mx-auto">
+{%for item in related_items%}
+<a href="{% url 'item:detalhes' item.id%}">
+<img src="{{item.image.url}}">
+<p>{{item.name}}</p>
+<p>{{item.price}}</p>
+
+{%if request.user == item.created_by %}
+<a type="submit" href="{%url 'item:edit' item.id %}" class="btn-success">editar</a>
+<a type="submit" href="{%url 'item:delete' item.id %}" class="btn-danger">apagar</a>
+{%else%}
+<a href="" class="btn btn-success">contactar o vendedor</a>
+{%endif%}
+</a>
+</div>
+{%endfor%}
+{%endblock%}

@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+{%block title%}Registro{%endblock%}
+{% block content%}
+
+<section>
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-12 col-sm-8 col-md-6 m-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <form method="post" action=".">
+                            {% csrf_token %}
+                            <input type="text" class="form-control my-4 py-4" placeholder="username" name="username">
+                           
+                            <input type="email" class="form-control my-4 py-4" placeholder="email" name="email">
+                            
+                            <input type="password" class="form-control my-4 py-4" placeholder="digite password" name="password1">
+                            
+                            <input type="password" class="form-control my-4 py-4" placeholder="repetir a password" name="password2">
+                            {% if form.errors or form.non_field_errors %}
+                            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                                {% for field in form %}
+                                    {{ field.errors }}
+                                {% endfor %}
+                
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        <button class="btn btn-primary">Registrar</button> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  {%endblock%}
